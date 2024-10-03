@@ -14,9 +14,11 @@ client: AsyncOpenAI = AsyncOpenAI(api_key=getenv("OPENAI_API_KEY"))
 
 async def create_hyphotetical_document(query: Query) -> ChatGPTResponse:
     response = await client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "system", "content": "You are a helpful assistant."},
-                   {"role": "user", "content": query.query}]
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an AI assistant capable of generating hypothetical documents. Create a detailed, well-structured document based on the user's query."},
+            {"role": "user", "content": query.query}
+        ]
     )
     return ChatGPTResponse(response=response.choices[0].message.content)
 
