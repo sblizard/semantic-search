@@ -4,9 +4,10 @@ from openai import AsyncOpenAI
 #built-in imports
 from dotenv import load_dotenv
 from os import getenv
+from src.embed import embed
 
 #local imports
-from src.io import Query, ChatGPTResponse
+from src.io import Query, ChatGPTResponse, Embedding
 
 load_dotenv()
 
@@ -22,3 +23,6 @@ async def create_hyphotetical_document(query: Query) -> ChatGPTResponse:
     )
     return ChatGPTResponse(response=response.choices[0].message.content)
 
+async def create_hyphotetical_document_embedding(query: Query) -> Embedding:
+   embedding: Embedding = await embed(query.query)
+   return embedding

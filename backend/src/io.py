@@ -9,3 +9,14 @@ class HyphoteticalDocument(BaseModel):
 
 class ChatGPTResponse(BaseModel):
     response: str
+
+class Embeddings(BaseModel):
+    values: list[float]
+
+class PineconeUsage(BaseModel):
+    total_tokens: int
+
+class EmbeddingsList(BaseModel):
+    model: str
+    data: Embeddings
+    usage: PineconeUsage
