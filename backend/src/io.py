@@ -20,3 +20,23 @@ class EmbeddingsList(BaseModel):
     model: str
     data: Embeddings
     usage: PineconeUsage
+
+class GetEmbeddingParams(BaseModel):
+    text: str
+
+class EmbeddingOutput(BaseModel):
+    embedding: list[float]
+
+class UpsertInput(BaseModel):
+    data: EmbeddingOutput
+    metadata: dict[str, str]
+
+class SearchQuery(BaseModel):
+    text: str
+
+class Match(BaseModel):
+    id: str
+    metadata: dict[str, str]
+
+class SearchOutput(BaseModel):
+    matches: list[Match]
