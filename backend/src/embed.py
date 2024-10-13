@@ -78,3 +78,22 @@ async def semantic_search(query: SearchQuery) -> SearchOutput:
         search_output.matches.append(match)
     
     return search_output
+
+async def search_by_embedding(embedding: EmbeddingOutput):
+    results = index.query(
+        vector=embedding.embedding,
+        top_k=3,
+        include_metadata=True
+    )
+
+    search_output: SearchOutput = SearchOutput(matches=[])
+
+    for i in range(len(results['matches'])):
+        match_data = results['matches'][i]
+        match: Match = Match(
+            id=match_data['id'], 
+            metadata=match_data['metadata'] 
+        )
+        search_output.matches.append(match)
+    
+    return search_output
