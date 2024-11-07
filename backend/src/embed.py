@@ -79,6 +79,7 @@ async def semantic_search(query: SearchQuery) -> SearchOutput:
     
     return search_output
 
+
 async def search_by_embedding(embedding: EmbeddingOutput):
     results = index.query(
         vector=embedding.embedding,
