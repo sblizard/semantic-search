@@ -18,10 +18,11 @@ async def create_hyphotetical_document(query: Query) -> ChatGPTResponse:
     response = await client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": "You are an AI assistant capable of generating hypothetical documents. Create a detailed, well-structured document based on the user's query."},
+            {"role": "system", "content": "Generate a document that addresses '{query_text}'. The document should include realistic but fictional data, examples, and content that mimics what an authentic response would entail.Ensure the information is plausible and contextually appropriate, but clearly marked as hypothetical."},
             {"role": "user", "content": query_text}
         ]
     )
+    print("****************" + response.choices[0].message.content + "****************")
     return ChatGPTResponse(response=response.choices[0].message.content)
 
 async def create_hyphotetical_document_embedding(query: Query) -> EmbeddingsList:
